@@ -45,3 +45,10 @@ bot.onText(/\/post (.+)/, async (msg, match) => {
   }
   bot.sendMessage(msg.chat.id, `✅ শেষ\nসফল: ${success}  ব্যর্থ: ${fail}`);
 });
+bot.on('new_chat_members', async (msg) => {
+  if (msg.new_chat_members.some(member => member.id === (await bot.getMe()).id)) {
+    bot.sendMessage(msg.chat.id, `✅ ধন্যবাদ আমাকে এড করার জন্য!\nএই গ্রুপের ID:\n\`${msg.chat.id}\``, {
+      parse_mode: 'Markdown'
+    });
+  }
+});
